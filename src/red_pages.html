@@ -2,7 +2,7 @@
 <html lang="fr">
 <head> 
   <meta charset="utf-8">
-  <title>Titre de la page</title>
+  <title>GOTW v2 Testing zone</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script>
 	$(document).ready(function() {
@@ -12,6 +12,11 @@
 				  $("iframe").each(function() {
 				  	var completedPath = host + $(this).attr("path"); 
 				  	$(this).attr("src", completedPath);
+				  	console.log(completedPath);
+				  });
+				  $("a.link").each(function() {
+				  	var completedPath = host + $(this).attr("path"); 
+				  	$(this).attr("href", completedPath);
 				  	console.log(completedPath);
 				  });
 			    });
@@ -47,19 +52,33 @@
 		.center {
 			text-align: center;
 		}
+		li {
+			list-style: none;
+		}
   </style>
 </head>
 <body>
 	<div class="container">
-		<h1>RED pages</h1>
+		<h1>GOTW v2 // Testing zone</h1>
+		<!-- Choose your environment-->
 		<div class="center">
-			<select id="platform">
+			Choose platform: <select id="platform">
+				<option name="http://localhost:4502" selected="selected">LOCALHOST</option>
 				<option name="http://10.10.1.67:4502" selected="selected">INT SII</option>
-				<option name="http://10.10.1.67:34502">PREPROD DIGITAS</option>
-				<option name="http://10.10.1.67:44502">PROD DIGITAS</option>	
+				<option name="http://cq5.pre-prod.nissan.eu">PREPROD DIGITAS</option>
+				<option name="http://cq5.prod.nissan.eu">PROD DIGITAS</option>	
 			</select>	
+		<!-- Menu-->
+		<a name="menu">
+		<ul class="menu">
+			<li><a href="#pages">Pages</a></li>
+			<li><a href="#pollupclear">pollupclear servlet</a></li>
+			<li><a href="#pollservlet">poll servlet</a></li>
+		</ul>
 		</div>
 
+<!-- Pages -->
+<a name="pages">
 <h2>signup confirmation</h2>
 <iframe path="/GB/en/experience-nissan/uefa-champions-league/goal-of-the-week-game-v2/red.signup-confirmation.html?wcmmode=disabled" width=1024 height=900>
 </iframe>
@@ -126,6 +145,29 @@ h
 <iframe path="/content/GB/en/experience-nissan/uefa-champions-league/gotw-v2ptr/login-without-register.html?wcmmode=disabled" width=1024 height=900>
 </iframe>
 
+<!-- Pollupclear -->
+<a name="pollupclear"></a>
+<h2>pollupclear</h2>
+<h3>Flush the CRX (poll.json) and applicative IOD cache (WARNING...If you are in PROD)</h3>
+<ul>
+<li><a class="link" path="/services/gotw/pollupclear?flush=ALL&locale=ALL">Flush all caches for all locales</a></li>
+<li><a class="link" path="/services/gotw/pollupclear?flush=ALL&locale=FR-fr">Flush all caches for locale FR-fr</a></li>
+<li><a class="link" path="/services/gotw/pollupclear?locale=FR-fr">Flush Default (IOD) for locale FR-fr</a></li>
+<li><a class="link" path="/services/gotw/pollupclear?flush=IOD&locale=FR-fr">Flush IOD for locale FR-fr</a></li>
+<li><a class="link" path="/services/gotw/pollupclear?flush=IOD">Flush IOD for all locales</a></li>
+<li><a class="link" path="/services/gotw/pollupclear">Flush Legacy (IOD)</a></li>
+</ul>
+
+<!-- poll servlet -->
+<a name="pollservlet"></a>
+<h2>pollservlet</a>
+<h3>Display the data stream</h3>
+<ul>
+<li><a class="link" path="/services/FR/fr/gotw.pollservlet.servlet.json">Stream for FR/fr</a></li>
+<li><a class="link" path="/services/GB/en/gotw.pollservlet.servlet.json">Stream for GB/en</a></li>
+</ul>
+
+<a href="#menu">Go back to menu</a>
 </div>
 </body>
 
